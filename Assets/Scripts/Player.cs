@@ -19,7 +19,8 @@ public class Player : MonoBehaviour
 
     private bool grounded;
     private bool climbing;
-    private bool convey;
+    private bool conveyagainst;
+    private bool conveywith;
 
     public Transform conveyTransform;
     
@@ -45,7 +46,8 @@ public class Player : MonoBehaviour
     {
         grounded = false;
         climbing = false;
-        convey = false;
+        conveyagainst = false;
+        conveywith = false;
 
 
         Vector2 size = collider.bounds.size;
@@ -58,13 +60,17 @@ public class Player : MonoBehaviour
         {
             GameObject hit = results[i].gameObject;
 
-            if (hit.layer == LayerMask.NameToLayer("Ground") || hit.layer == LayerMask.NameToLayer("Conveyor"))
+            if (hit.layer == LayerMask.NameToLayer("Ground") || hit.layer == LayerMask.NameToLayer("Conveyor1") || hit.layer == LayerMask.NameToLayer("Conveyor2"))
             {
                 grounded = hit.transform.position.y < (transform.position.y - 0.5f);
                 Physics2D.IgnoreCollision(collider, results[i], !grounded);
-                if (hit.layer == LayerMask.NameToLayer("Conveyor") && grounded == true)
+                if (hit.layer == LayerMask.NameToLayer("Conveyor1") && grounded == true)
                 {
-                    convey = true;
+                    conveyagainst = true;
+                    conveyTransform = hit.transform;
+                } else if (hit.layer == LayerMask.NameToLayer("Conveyor2") && grounded == true)
+                {
+                    conveywith = true;
                     conveyTransform = hit.transform;
                 }
 
@@ -95,8 +101,10 @@ public class Player : MonoBehaviour
             direction.y = Mathf.Max(direction.y, -1f);
         }
 
-        if (convey) {
+        if (conveyagainst) {
             direction.x -= conveyTransform.right.x * conveySpeed;
+        } else if (conveywith) {
+            direction.x += conveyTransform.right.x * conveySpeed;
         }
 
         if (Input.GetAxis("Horizontal") > 0) {

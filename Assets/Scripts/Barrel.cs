@@ -14,8 +14,10 @@ public class Barrel : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground")) {
             rigidbody.AddForce(collision.transform.right * speed, ForceMode2D.Impulse);
-        } else if (collision.gameObject.layer == LayerMask.NameToLayer("Conveyor")) {
+        } else if (collision.gameObject.layer == LayerMask.NameToLayer("Conveyor1")) {
             rigidbody.AddForce(collision.transform.right * (speed - 1.25f), ForceMode2D.Impulse);
+        } else if (collision.gameObject.layer == LayerMask.NameToLayer("Conveyor2")) {
+            rigidbody.AddForce(collision.transform.right * (speed + 1.25f), ForceMode2D.Impulse);
         }
     }
 }
