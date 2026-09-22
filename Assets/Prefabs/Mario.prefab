@@ -144,3 +144,6 @@ MonoBehaviour:
   climbSprite: {fileID: 21300000, guid: 5d481826ec94b4f53a045c6f681258b1, type: 3}
   moveSpeed: 3
   jumpStrength: 4
+  conveySpeed: 1.75
+  trampStrength: 6
+  conveyTransform: {fileID: 0}

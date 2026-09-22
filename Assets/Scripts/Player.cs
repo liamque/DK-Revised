@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public float moveSpeed = 1f;
     public float jumpStrength = 1f;
     public float conveySpeed = 1.75f;
+    public float trampStrength = 1f;
 
     private bool grounded;
     private bool climbing;
@@ -75,6 +76,10 @@ public class Player : MonoBehaviour
                 }
 
             } 
+            else if (hit.layer == LayerMask.NameToLayer("Trampoline"))
+            {
+                direction = Vector2.up * trampStrength;
+            }
             else if (hit.layer == LayerMask.NameToLayer("Ladder"))
             {
                 climbing = true;
