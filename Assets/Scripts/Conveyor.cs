@@ -13,7 +13,7 @@ public class Conveyor : MonoBehaviour
 
     private void OnEnable()
     {
-        InvokeRepeating(nameof(AnimateSprite), 1f/12f, 1f/12f);
+        InvokeRepeating(nameof(AnimateSprite), 1f/6f, 1f/6f);
     }
 
     private void OnDisable()
