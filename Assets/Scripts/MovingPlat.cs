@@ -14,11 +14,26 @@ public class MovingPlat : MonoBehaviour
     public Vector3 posA;
     public Vector3 posB;
 
+    private SpriteRenderer spriteRenderer;
+    public Sprite[] moveSprites;
+    private int spriteIndex;
+
     void Awake()
     {
         collider = GetComponent<Collider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         transform.position = posA;
+    }
+
+    private void OnEnable()
+    {
+        InvokeRepeating(nameof(AnimateSprite), 1f/6f, 1f/6f);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke();
     }
 
     void FixedUpdate()
@@ -42,6 +57,18 @@ public class MovingPlat : MonoBehaviour
         {
             target = 0;
         }
+        
+    }
+
+    private void AnimateSprite()
+    {
+        spriteIndex++;
+
+        if (spriteIndex >= moveSprites.Length) {
+            spriteIndex = 0;
+        }
+
+        spriteRenderer.sprite = moveSprites[spriteIndex];
         
     }
 }

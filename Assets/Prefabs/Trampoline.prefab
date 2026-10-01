@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8987238305547030063}
   - component: {fileID: 645622391168124301}
   - component: {fileID: 9118013066449004836}
+  - component: {fileID: 5785493014374148370}
   m_Layer: 10
   m_Name: Trampoline
   m_TagString: Untagged
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 5d0b83386ae9a499284c344e56e102ba, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0352493b004014e87b1031e68341d1fb, type: 3}
   m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -111,3 +112,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &5785493014374148370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6694020558040725321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82f8ec46655b74b9a993a7e5b6e2af42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tramSprites:
+  - {fileID: 21300000, guid: 0352493b004014e87b1031e68341d1fb, type: 3}
+  - {fileID: 21300000, guid: 5f40ba38db5854a39b24bd7f6d408e4e, type: 3}
+  pressed: 0
+  openDelay: 0.15

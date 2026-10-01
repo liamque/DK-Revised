@@ -88,6 +88,7 @@ public class Player : MonoBehaviour
             else if (hit.layer == LayerMask.NameToLayer("Trampoline"))
             {
                 direction = Vector2.up * trampStrength;
+                hit.GetComponent<Trampoline>().pressed = 1;
             }
             else if (hit.layer == LayerMask.NameToLayer("Ladder"))
             {

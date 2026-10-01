@@ -1678,6 +1678,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2269622818290975289, guid: 2f0239b23e3094ea59886430fcf8d964, type: 3}
+      propertyPath: moveSprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2600783122968848294, guid: 2f0239b23e3094ea59886430fcf8d964, type: 3}
       propertyPath: m_Name
       value: MovingPlat
