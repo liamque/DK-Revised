@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     private bool conveyagainst;
     private bool conveywith;
 
+    public float platMotion = 0f;
+
     public Transform conveyTransform;
     
     private void Awake()
@@ -61,7 +63,7 @@ public class Player : MonoBehaviour
         {
             GameObject hit = results[i].gameObject;
 
-            if (hit.layer == LayerMask.NameToLayer("Ground") || hit.layer == LayerMask.NameToLayer("Conveyor1") || hit.layer == LayerMask.NameToLayer("Conveyor2"))
+            if (hit.layer == LayerMask.NameToLayer("Ground") || hit.layer == LayerMask.NameToLayer("MovingGround") || hit.layer == LayerMask.NameToLayer("Conveyor1") || hit.layer == LayerMask.NameToLayer("Conveyor2"))
             {
                 grounded = hit.transform.position.y < (transform.position.y - 0.5f);
                 Physics2D.IgnoreCollision(collider, results[i], !grounded);
@@ -73,6 +75,13 @@ public class Player : MonoBehaviour
                 {
                     conveywith = true;
                     conveyTransform = hit.transform;
+                }
+
+                if (hit.layer == LayerMask.NameToLayer("MovingGround") && grounded == true)
+                {
+                    platMotion = hit.GetComponent<MovingPlat>().platMotion;
+                } else {
+                    platMotion = 0f;
                 }
 
             } 
@@ -100,7 +109,7 @@ public class Player : MonoBehaviour
             direction += Physics2D.gravity * Time.deltaTime;
         }
 
-        direction.x = Input.GetAxis("Horizontal") * moveSpeed;
+        direction.x = Input.GetAxis("Horizontal") * moveSpeed + platMotion * 1.4f;
 
         if (grounded) {
             direction.y = Mathf.Max(direction.y, -1f);
