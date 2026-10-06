@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - Objective
+  - Attack
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Trampoline
   - Oil
   - MovingGround
-  - 
+  - Hitbox
   - 
   - 
   - 

@@ -39,7 +39,7 @@ public class Trampoline : MonoBehaviour
         } else {
             openTime = 0f;
         }
-        Debug.Log(openTime);
+        // Debug.Log(openTime);
         
     }
 

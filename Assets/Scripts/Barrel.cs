@@ -39,6 +39,10 @@ public class Barrel : MonoBehaviour
                 {
                     Destroy(this.gameObject);
                 }
+            } else if (hit.layer == LayerMask.NameToLayer("Hitbox"))
+            {
+                Debug.Log("destroy barrel");
+                Destroy(this.gameObject);
             }
         }
     }

@@ -25,6 +25,9 @@ public class Player : MonoBehaviour
 
     public float platMotion = 0f;
 
+    public GameObject hammerHitbox;
+    public bool hammer;
+
     public Transform conveyTransform;
     
     private void Awake()
@@ -33,6 +36,7 @@ public class Player : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
         results = new Collider2D[4];
+        hammer = false;
     }
 
     private void OnEnable()
@@ -43,6 +47,15 @@ public class Player : MonoBehaviour
     private void OnDisable()
     {
         CancelInvoke();
+    }
+
+    private void EquipItem()
+    {
+        if (hammer) {
+            hammerHitbox.SetActive(true);
+        } else {
+            hammerHitbox.SetActive(false);
+        }
     }
 
     private void CheckCollision()
@@ -85,12 +98,12 @@ public class Player : MonoBehaviour
                 }
 
             } 
-            else if (hit.layer == LayerMask.NameToLayer("Trampoline"))
+            else if (hit.layer == LayerMask.NameToLayer("Trampoline") && hammer == false)
             {
                 direction = Vector2.up * trampStrength;
                 hit.GetComponent<Trampoline>().pressed = 1;
             }
-            else if (hit.layer == LayerMask.NameToLayer("Ladder"))
+            else if (hit.layer == LayerMask.NameToLayer("Ladder") && hammer == false)
             {
                 climbing = true;
             }
@@ -99,12 +112,13 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        EquipItem();
         CheckCollision();
 
         if (climbing)
         {
             direction.y = Input.GetAxis("Vertical") * moveSpeed;
-        } else if (grounded && Input.GetButtonDown("Jump")) {
+        } else if (grounded && Input.GetButtonDown("Jump") && hammer == false) {
             direction = Vector2.up * jumpStrength;
         } else {
             direction += Physics2D.gravity * Time.deltaTime;
