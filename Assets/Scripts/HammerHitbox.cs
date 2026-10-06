@@ -14,10 +14,15 @@ public class HammerHitbox : MonoBehaviour
         playerPos = playerTrans.position;
         playerFacing = playerTrans.rotation.y;
 
-        if (playerFacing == 0) {
-            transform.position = new Vector3 (playerPos.x + 0.7f, playerPos.y + 0f, playerPos.z);
-        } else {
-            transform.position = new Vector3 (playerPos.x - 0.7f, playerPos.y - 0f, playerPos.z);
+        if (player.hammerDown == true) {
+            if (playerFacing == 0) {
+                transform.position = new Vector3 (playerPos.x + 0.95f, playerPos.y, playerPos.z);
+            } else {
+                transform.position = new Vector3 (playerPos.x - 0.95f, playerPos.y, playerPos.z);
+            }
+        } else
+        {
+            transform.position = new Vector3 (playerPos.x, playerPos.y + 0.9f, playerPos.z);
         }
         
     }

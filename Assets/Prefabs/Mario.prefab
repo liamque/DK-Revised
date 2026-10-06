@@ -141,10 +141,23 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e9287bbcd9fcf45b3a427eac1fde0a78, type: 3}
   - {fileID: 21300000, guid: 7d04d56997cba488182a2ccecae951a4, type: 3}
   - {fileID: 21300000, guid: 125bdb05c1ddf4ca8ad56c8a1929e7bb, type: 3}
+  hammerUpSprites:
+  - {fileID: 21300000, guid: 9b6516e9d04d54bb98e955a64be584cd, type: 3}
+  - {fileID: 21300000, guid: fb63471a5efe241018f1c6ac5eaccc35, type: 3}
+  - {fileID: 21300000, guid: 9b6516e9d04d54bb98e955a64be584cd, type: 3}
+  - {fileID: 21300000, guid: 9508dd16ab9694f6f8c8980d24967b3e, type: 3}
+  hammerDownSprites:
+  - {fileID: 21300000, guid: 080533c2484dd4002ad7447e505b0d74, type: 3}
+  - {fileID: 21300000, guid: f5191d77cb440429eab25664b169423a, type: 3}
+  - {fileID: 21300000, guid: 080533c2484dd4002ad7447e505b0d74, type: 3}
+  - {fileID: 21300000, guid: 967cb7591c73c45a5ba7dedf85947d93, type: 3}
   climbSprite: {fileID: 21300000, guid: 5d481826ec94b4f53a045c6f681258b1, type: 3}
   moveSpeed: 3
   jumpStrength: 4
   conveySpeed: 1.75
   trampStrength: 6
   platMotion: 0
+  hammerHitbox: {fileID: 0}
+  hammer: 0
+  hammerDuration: 10
   conveyTransform: {fileID: 0}

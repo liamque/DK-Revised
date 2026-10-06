@@ -1,9 +1,12 @@
+using System.Data.Common;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     public Sprite[] runSprites;
+    public Sprite[] hammerUpSprites;
+    public Sprite[] hammerDownSprites;
     public Sprite climbSprite;
     private int spriteIndex;
     
@@ -27,6 +30,10 @@ public class Player : MonoBehaviour
 
     public GameObject hammerHitbox;
     public bool hammer;
+    public bool hammerDown;
+    private int hammerDownTime;
+    private float hammerTime;
+    public float hammerDuration;
 
     public Transform conveyTransform;
     
@@ -37,6 +44,8 @@ public class Player : MonoBehaviour
         collider = GetComponent<Collider2D>();
         results = new Collider2D[4];
         hammer = false;
+        hammerDown = false;
+        hammerDownTime = 0;
     }
 
     private void OnEnable()
@@ -53,8 +62,16 @@ public class Player : MonoBehaviour
     {
         if (hammer) {
             hammerHitbox.SetActive(true);
+            hammerTime += Time.deltaTime;
+
+            if (hammerTime >= hammerDuration) {
+                hammer = false;
+            }
         } else {
             hammerHitbox.SetActive(false);
+            hammerTime = 0f;
+            hammerDown = false;
+            hammerDownTime = 0;
         }
     }
 
@@ -98,7 +115,7 @@ public class Player : MonoBehaviour
                 }
 
             } 
-            else if (hit.layer == LayerMask.NameToLayer("Trampoline") && hammer == false)
+            else if (hit.layer == LayerMask.NameToLayer("Trampoline"))
             {
                 direction = Vector2.up * trampStrength;
                 hit.GetComponent<Trampoline>().pressed = 1;
@@ -106,6 +123,14 @@ public class Player : MonoBehaviour
             else if (hit.layer == LayerMask.NameToLayer("Ladder") && hammer == false)
             {
                 climbing = true;
+            } else if (hit.layer == LayerMask.NameToLayer("Item"))
+            {
+                if (hit.CompareTag("Hammer"))
+                {
+                    hammer = true;
+                    hammerTime = 0f;
+                    Destroy(hit);
+                }
             }
         } 
     }
@@ -154,14 +179,37 @@ public class Player : MonoBehaviour
         {
             spriteRenderer.sprite = climbSprite;
         }
-        else if (Input.GetAxis("Horizontal") != 0)
+        else 
         {
-            spriteIndex++;
+            if (Input.GetAxis("Horizontal") != 0) {
+                spriteIndex++;
 
-            if (spriteIndex >= runSprites.Length) {
-                spriteIndex = 0;
+                if (spriteIndex >= runSprites.Length) {
+                    spriteIndex = 0;
+                }
+            }
+        }
+        
+        if (hammer)
+        {
+            if (hammerDownTime == 2) {
+                hammerDown = true;
+            } else
+            if (hammerDownTime == 4){
+                hammerDown = false;
+                hammerDownTime = 0;
             }
 
+            if (hammerDown) {
+                spriteRenderer.sprite = hammerDownSprites[spriteIndex];
+            } else
+            {
+                spriteRenderer.sprite = hammerUpSprites[spriteIndex];
+            }
+
+            hammerDownTime++;
+        } else
+        {
             spriteRenderer.sprite = runSprites[spriteIndex];
         }
     }
