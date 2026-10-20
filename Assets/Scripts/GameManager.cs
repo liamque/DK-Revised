@@ -7,8 +7,11 @@ public class GameManager : MonoBehaviour
     private int lives;
     private int score;
 
+    private GameObject bgm;
+
     private void Start()
     {
+        bgm = GameObject.Find("MusicPlayer");
         DontDestroyOnLoad(gameObject);
         NewGame();
     }
@@ -37,6 +40,7 @@ public class GameManager : MonoBehaviour
     private void LoadScene()
     {
         SceneManager.LoadScene(level);
+        bgm.GetComponent<MusicController>().PlayMusic(0);
     }
 
     public void LevelComplete()

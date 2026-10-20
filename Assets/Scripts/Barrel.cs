@@ -7,6 +7,8 @@ public class Barrel : MonoBehaviour
 
     private Collider2D[] results;
 
+    public AudioClip destroySFX;
+
     public float speed = 1f;
 
     private void Awake()
@@ -42,6 +44,7 @@ public class Barrel : MonoBehaviour
             } else if (hit.layer == LayerMask.NameToLayer("Hitbox"))
             {
                 Debug.Log("destroy barrel");
+                 AudioSource.PlayClipAtPoint(destroySFX, transform.position, 1f);
                 Destroy(this.gameObject);
             }
         }

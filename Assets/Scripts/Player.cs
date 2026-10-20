@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     public Sprite[] runSprites;
     public Sprite[] hammerUpSprites;
     public Sprite[] hammerDownSprites;
+    public Sprite[] hoseDownSprites;
+    public Sprite[] hoseUpSprites;
     public Sprite climbSprite;
     private int spriteIndex;
     
@@ -28,24 +30,41 @@ public class Player : MonoBehaviour
 
     public float platMotion = 0f;
 
-    public GameObject hammerHitbox;
-    public bool hammer;
-    public bool hammerDown;
-    private int hammerDownTime;
-    private float hammerTime;
-    public float hammerDuration;
+    public int item; // 0 = none, 1 = hammer, 2 = hose
+
+    public GameObject hammerHitbox; // GameObject used for barrel destroying hitbox
+    public bool hammerDown; // true = hammer lowered, false = hammer raised
+    private int hammerDownTime; // current animation frame of the hammer swing cycle
+
+    public GameObject hoseSpray; //GameObject fired by hose
+    public int hoseDown; // 1 = hose pointed down, 0 = hose pointed up
+
+    private float hammerTime; // Time since an item (hammer/hose) was collected
+    public float hammerDuration; // Maximum duration a hammer item can be held
+    public float hoseDuration; // Maximum duration a hose item can be held
+
+    public AudioClip jumpSFX;
+    public AudioClip deathSFX;
+    public AudioClip stepSFX;
+
+    private float stepCount;
+    public float stepDuration;
 
     public Transform conveyTransform;
+
+    private GameObject bgm;
     
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
+        bgm = GameObject.Find("MusicPlayer");
         results = new Collider2D[4];
-        hammer = false;
+        item = 0;
         hammerDown = false;
         hammerDownTime = 0;
+        hoseDown = 0;
     }
 
     private void OnEnable()
@@ -60,19 +79,41 @@ public class Player : MonoBehaviour
 
     private void EquipItem()
     {
-        if (hammer) {
+        if (item == 1) {
             hammerHitbox.SetActive(true);
             hammerTime += Time.deltaTime;
 
             if (hammerTime >= hammerDuration) {
-                hammer = false;
+                item = 0;
+                bgm.GetComponent<MusicController>().PlayMusic(0);
             }
-        } else {
+        } else if (item == 2) {
+            hammerTime += Time.deltaTime;
+
+            if (Input.GetButtonDown("Fire1"))
+            {
+                hoseDown = 0;
+            } else if (Input.GetButtonDown("Fire2"))
+            {
+                hoseDown = 1;
+            }
+
+            if (hammerTime >= hoseDuration) {
+                item = 0;
+                bgm.GetComponent<MusicController>().PlayMusic(0);
+            }
+        }
+        else {
             hammerHitbox.SetActive(false);
             hammerTime = 0f;
             hammerDown = false;
             hammerDownTime = 0;
         }
+    }
+
+    private void Spray()
+    {
+        Instantiate(hoseSpray, transform.position, new Quaternion (0,0,180*hoseDown,1));
     }
 
     private void CheckCollision()
@@ -118,19 +159,26 @@ public class Player : MonoBehaviour
             else if (hit.layer == LayerMask.NameToLayer("Trampoline"))
             {
                 direction = Vector2.up * trampStrength;
-                hit.GetComponent<Trampoline>().pressed = 1;
+                if (hit.GetComponent<Trampoline>().pressed == 0) {
+                    bgm.GetComponent<MusicController>().PlayClip2D(jumpSFX);
+                    hit.GetComponent<Trampoline>().pressed = 1;
+                }
             }
-            else if (hit.layer == LayerMask.NameToLayer("Ladder") && hammer == false)
+            else if (hit.layer == LayerMask.NameToLayer("Ladder") && item == 0)
             {
                 climbing = true;
             } else if (hit.layer == LayerMask.NameToLayer("Item"))
             {
                 if (hit.CompareTag("Hammer"))
                 {
-                    hammer = true;
-                    hammerTime = 0f;
-                    Destroy(hit);
+                    item = 1;
+                } else if (hit.CompareTag("Washer"))
+                {
+                    item = 2;
                 }
+                hammerTime = 0f;
+                bgm.GetComponent<MusicController>().PlayMusic(1);
+                Destroy(hit);
             }
         } 
     }
@@ -143,11 +191,28 @@ public class Player : MonoBehaviour
         if (climbing)
         {
             direction.y = Input.GetAxis("Vertical") * moveSpeed;
-        } else if (grounded && Input.GetButtonDown("Jump") && hammer == false) {
+        } else if (grounded && Input.GetButtonDown("Jump") && item != 1) {
             direction = Vector2.up * jumpStrength;
+            bgm.GetComponent<MusicController>().PlayClip2D(jumpSFX);
+
         } else {
             direction += Physics2D.gravity * Time.deltaTime;
         }
+
+        if (item == 2 && (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2")))
+        {
+            Spray();
+        }
+
+        if (Input.GetButton("Horizontal") && grounded && stepCount > stepDuration)
+        {
+            bgm.GetComponent<MusicController>().PlayClip2D(stepSFX);
+            stepCount = 0f;
+        } else
+        {
+            stepCount += Time.deltaTime;
+        }
+        
 
         direction.x = Input.GetAxis("Horizontal") * moveSpeed + platMotion * 1.4f;
 
@@ -190,7 +255,7 @@ public class Player : MonoBehaviour
             }
         }
         
-        if (hammer)
+        if (item == 1)
         {
             if (hammerDownTime == 2) {
                 hammerDown = true;
@@ -208,7 +273,17 @@ public class Player : MonoBehaviour
             }
 
             hammerDownTime++;
-        } else
+        } 
+        else if (item == 2)
+        {
+            if (hoseDown == 0) {
+                spriteRenderer.sprite = hoseUpSprites[spriteIndex];
+            } else
+            {
+                spriteRenderer.sprite = hoseDownSprites[spriteIndex];
+            }
+        }
+        else if (item == 0)
         {
             spriteRenderer.sprite = runSprites[spriteIndex];
         }
@@ -223,6 +298,8 @@ public class Player : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
+            bgm.GetComponent<MusicController>().StopMusic();
+            bgm.GetComponent<MusicController>().PlayClip2D(deathSFX);
             enabled = false;
             FindObjectOfType<GameManager>().LevelFailed();
         }
