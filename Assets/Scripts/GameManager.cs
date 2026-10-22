@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             LugiCounter += 1;
             if (LugiCounter == 5) {
