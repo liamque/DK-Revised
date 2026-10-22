@@ -176,10 +176,12 @@ public class Player : MonoBehaviour
                     bgm.GetComponent<MusicController>().PlayClip2D(jumpSFX);
                     hit.GetComponent<Trampoline>().pressed = 1;
                 }
+                platMotion = 0f;
             }
             else if (hit.layer == LayerMask.NameToLayer("Ladder") && item == 0)
             {
                 climbing = true;
+                platMotion = 0f;
             } else if (hit.layer == LayerMask.NameToLayer("Item"))
             {
                 if (hit.CompareTag("Hammer"))
@@ -208,6 +210,7 @@ public class Player : MonoBehaviour
         {
             direction.y = Input.GetAxis("Vertical") * moveSpeed;
         } else if (grounded && Input.GetButtonDown("Jump") && item != 1) {
+            platMotion = 0f;
             direction = Vector2.up * jumpStrength;
             bgm.GetComponent<MusicController>().PlayClip2D(jumpSFX);
 

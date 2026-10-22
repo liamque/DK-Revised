@@ -42,7 +42,7 @@ public class Barrel1 : MonoBehaviour
                 if (Mathf.Abs(hit.transform.position.x - transform.position.x) < 0.15f)
                 {
                     hit.GetComponent<OilBarrel>().onFire = true;
-                    Instantiate(fireball, transform.position + new Vector3 (-0.09f, 0.1f, 0), Quaternion.identity);
+                    Instantiate(fireball, hit.transform.position, Quaternion.identity);
                     Destroy(this.gameObject);
                 }
             } else if (hit.layer == LayerMask.NameToLayer("Hitbox"))
@@ -59,6 +59,8 @@ public class Barrel1 : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground")) {
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.angularVelocity = 0f;
             rigidbody.AddForce(collision.transform.right * speed, ForceMode2D.Impulse);
         } else if (collision.gameObject.layer == LayerMask.NameToLayer("Conveyor1")) {
             rigidbody.AddForce(collision.transform.right * (speed - 1.25f), ForceMode2D.Impulse);

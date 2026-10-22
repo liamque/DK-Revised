@@ -55,6 +55,8 @@ public class Barrel0 : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground")) {
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.angularVelocity = 0f;
             rigidbody.AddForce(collision.transform.right * speed, ForceMode2D.Impulse);
         } else if (collision.gameObject.layer == LayerMask.NameToLayer("Conveyor1")) {
             rigidbody.AddForce(collision.transform.right * (speed - 1.25f), ForceMode2D.Impulse);
