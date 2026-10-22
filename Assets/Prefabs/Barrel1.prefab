@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 57070535368632013}
   - component: {fileID: 57070535368632048}
   - component: {fileID: 57070535368632015}
-  - component: {fileID: 2897103223327008687}
+  - component: {fileID: 3018305503900935394}
   m_Layer: 0
   m_Name: Barrel1
   m_TagString: Obstacle
@@ -124,7 +124,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.35
---- !u!114 &2897103223327008687
+--- !u!114 &3018305503900935394
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,8 +133,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 57070535368632012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2253a347dc6bd455996b317b0c19f24a, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ae33361900164f1b8f758db93dd7163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   destroySFX: {fileID: 8300000, guid: 4627adae73dc1431eaa46b4b71fea76c, type: 3}
   speed: 5
+  fireball: {fileID: 1028305916745351374, guid: faa0d547159f34ddea3f50c436d83c4f, type: 3}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 389556792847378004}
   - component: {fileID: 389556792847378005}
   - component: {fileID: 389556792847378011}
+  - component: {fileID: -8502510921791565691}
   m_Layer: 11
   m_Name: OilDrum
   m_TagString: Untagged
@@ -111,3 +112,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-8502510921791565691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389556792847378006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 883cfae19e844403db50f285e6ad760a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onFire: 0
+  burnSprites:
+  - {fileID: 21300000, guid: 3b24507dcc2d84ad3b32a6cb47fe5d1e, type: 3}
+  - {fileID: 21300000, guid: 4c70b09f6507f449b9945c9646a8e670, type: 3}
+  startSprite: {fileID: 21300000, guid: fcf76a9a3d755465ba1eedfb3dde3e86, type: 3}

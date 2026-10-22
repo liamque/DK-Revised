@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Barrel3 : MonoBehaviour
+public class Barrel2 : MonoBehaviour
 {
     private new Rigidbody2D rigidbody;
     private new Collider2D collider;
@@ -61,8 +61,10 @@ public class Barrel3 : MonoBehaviour
                 }
             } else if (hit.layer == LayerMask.NameToLayer("Hitbox"))
             {
-                Debug.Log("destroy barrel");
-                 AudioSource.PlayClipAtPoint(destroySFX, transform.position, 1f);
+                AudioSource.PlayClipAtPoint(destroySFX, transform.position, 1f);
+                Destroy(this.gameObject);
+            } else if (hit.layer == LayerMask.NameToLayer("DeathPlane"))
+            {
                 Destroy(this.gameObject);
             }
         }
@@ -84,7 +86,6 @@ public class Barrel3 : MonoBehaviour
             {
                 int randomType = Random.Range(0,2);
                 if (randomType == 1 && ladderCooldown > 0.25f) {
-                    Debug.Log(randomType);
                     LadderDescend();
                 } else
                 {

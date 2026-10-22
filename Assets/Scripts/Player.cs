@@ -1,5 +1,7 @@
+using System;
 using System.Data.Common;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -61,6 +63,8 @@ public class Player : MonoBehaviour
 
     private GameObject bgm;
     private GameObject gameManage;
+
+    private bool lost; // Variable that notes if you're dead which is checked whenever you die to make sure that when you die you don't die if you already died so you don't die twice in one death
     
     private void Awake()
     {
@@ -188,6 +192,9 @@ public class Player : MonoBehaviour
                 hammerTime = 0f;
                 bgm.GetComponent<MusicController>().PlayMusic(1);
                 Destroy(hit);
+            } else if (hit.layer == LayerMask.NameToLayer("Fireball") || hit.layer == LayerMask.NameToLayer("DeathPlane"))
+            {
+                Lose();
             }
         } 
     }
@@ -342,6 +349,15 @@ public class Player : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
+            Lose();
+        }
+    }
+
+    private void Lose()
+    {
+        if (lost == false)
+        {
+            lost = true;
             Physics2D.IgnoreLayerCollision(0, 0, true);
             bgm.GetComponent<MusicController>().StopMusic();
             bgm.GetComponent<MusicController>().PlayClip2D(deathSFX);
