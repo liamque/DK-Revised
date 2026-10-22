@@ -8,6 +8,7 @@ TagManager:
   - Objective
   - Attack
   - Hammer
+  - Washer
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - MovingGround
   - Hitbox
   - Item
-  - 
+  - Barrier
   - 
   - 
   - 

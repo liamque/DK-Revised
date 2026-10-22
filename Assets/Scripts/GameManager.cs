@@ -7,12 +7,19 @@ public class GameManager : MonoBehaviour
     private int lives;
     private int score;
 
+    public int LugiCounter;
+    public bool LugiMode;
+
     private GameObject bgm;
+    public AudioClip startBGM;
+    public AudioClip lugi;
 
     private void Start()
     {
         bgm = GameObject.Find("MusicPlayer");
         DontDestroyOnLoad(gameObject);
+        LugiMode = false;
+
         NewGame();
     }
 
@@ -64,6 +71,18 @@ public class GameManager : MonoBehaviour
             NewGame();
         } else {
             LoadLevel(level);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            LugiCounter += 1;
+            if (LugiCounter == 5) {
+                bgm.GetComponent<MusicController>().PlayClip2D(lugi);
+                LugiMode = true;
+            }
         }
     }
 }

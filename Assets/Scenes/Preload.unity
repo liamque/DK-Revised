@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 1112443273}
   - component: {fileID: 1112443274}
   m_Layer: 0
-  m_Name: Game Manager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,3 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82a3a3f5b896f40c8b812a28c4d2940d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LugiCounter: 0
+  LugiMode: 0
+  startBGM: {fileID: 8300000, guid: aadf1ce4d4e184f109582a98e77e666d, type: 3}
+  lugi: {fileID: 8300000, guid: 77c20f94f85994b4788865819b30d121, type: 3}

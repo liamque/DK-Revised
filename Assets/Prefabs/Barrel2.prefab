@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6163953757239771109}
   - component: {fileID: 6163953757239771098}
   - component: {fileID: 9040015388371828410}
+  - component: {fileID: 6817181027593330118}
   m_Layer: 0
   m_Name: Barrel2
   m_TagString: Obstacle
@@ -131,10 +132,30 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6163953757239771097}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2253a347dc6bd455996b317b0c19f24a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   destroySFX: {fileID: 8300000, guid: 4627adae73dc1431eaa46b4b71fea76c, type: 3}
   speed: 5
+--- !u!114 &6817181027593330118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6163953757239771097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 087e399fe8a254ed6b7c2f582c086698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroySFX: {fileID: 8300000, guid: 4627adae73dc1431eaa46b4b71fea76c, type: 3}
+  speed: 1
+  descending: 0
+  ladderCooldown: 0
+  rollSprite: {fileID: 21300000, guid: 204b997ed1cb4427893a5cbc2b5efdd1, type: 3}
+  descSprites:
+  - {fileID: 21300000, guid: f288235014b5c4cdab06923ecc239a7a, type: 3}
+  - {fileID: 21300000, guid: f5157722f37cb485283dd55687dad48a, type: 3}

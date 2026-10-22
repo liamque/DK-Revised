@@ -253,39 +253,40 @@ public class Player : MonoBehaviour
                     spriteIndex = 0;
                 }
             }
-        }
         
-        if (item == 1)
-        {
-            if (hammerDownTime == 2) {
-                hammerDown = true;
-            } else
-            if (hammerDownTime == 4){
-                hammerDown = false;
-                hammerDownTime = 0;
-            }
-
-            if (hammerDown) {
-                spriteRenderer.sprite = hammerDownSprites[spriteIndex];
-            } else
+        
+            if (item == 1)
             {
-                spriteRenderer.sprite = hammerUpSprites[spriteIndex];
-            }
+                if (hammerDownTime == 2) {
+                    hammerDown = true;
+                } else
+                if (hammerDownTime == 4){
+                    hammerDown = false;
+                    hammerDownTime = 0;
+                }
 
-            hammerDownTime++;
-        } 
-        else if (item == 2)
-        {
-            if (hoseDown == 0) {
-                spriteRenderer.sprite = hoseUpSprites[spriteIndex];
-            } else
+                if (hammerDown) {
+                    spriteRenderer.sprite = hammerDownSprites[spriteIndex];
+                } else
+                {
+                    spriteRenderer.sprite = hammerUpSprites[spriteIndex];
+                }
+
+                hammerDownTime++;
+            } 
+            else if (item == 2)
             {
-                spriteRenderer.sprite = hoseDownSprites[spriteIndex];
+                if (hoseDown == 0) {
+                    spriteRenderer.sprite = hoseUpSprites[spriteIndex];
+                } else
+                {
+                    spriteRenderer.sprite = hoseDownSprites[spriteIndex];
+                }
             }
-        }
-        else if (item == 0)
-        {
-            spriteRenderer.sprite = runSprites[spriteIndex];
+            else if (item == 0)
+            {
+                spriteRenderer.sprite = runSprites[spriteIndex];
+            }
         }
     }
 
@@ -293,6 +294,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Objective"))
         {
+            bgm.GetComponent<MusicController>().StopMusic();
             enabled = false;
             FindObjectOfType<GameManager>().LevelComplete();
         }

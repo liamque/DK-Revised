@@ -21,8 +21,16 @@ public class Spawner : MonoBehaviour
             firstBarrel = false;
         } else
         {
-            randomType = Random.Range(0,2);
-            Instantiate(type[randomType], transform.position, Quaternion.identity);
+            randomType = Random.Range(0,4);
+            if (randomType < 2) {
+                Instantiate(type[0], transform.position, Quaternion.identity);
+            } else if (randomType == 2)
+            {
+                Instantiate(type[1], transform.position, Quaternion.identity);
+            } else if (randomType == 3)
+            {
+                Instantiate(type[2], transform.position, Quaternion.identity);
+            }
         }
         Invoke(nameof(Spawn), Random.Range(minTime, maxTime));
     }
