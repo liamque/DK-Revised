@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6163953757239771096}
   - component: {fileID: 6163953757239771109}
   - component: {fileID: 6163953757239771098}
-  - component: {fileID: 9040015388371828410}
   - component: {fileID: 6817181027593330118}
   m_Layer: 0
   m_Name: Barrel2
@@ -125,20 +124,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.35
---- !u!114 &9040015388371828410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6163953757239771097}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2253a347dc6bd455996b317b0c19f24a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroySFX: {fileID: 8300000, guid: 4627adae73dc1431eaa46b4b71fea76c, type: 3}
-  speed: 5
 --- !u!114 &6817181027593330118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroySFX: {fileID: 8300000, guid: 4627adae73dc1431eaa46b4b71fea76c, type: 3}
-  speed: 1
+  speed: 5
   descending: 0
   ladderCooldown: 0
   rollSprite: {fileID: 21300000, guid: 204b997ed1cb4427893a5cbc2b5efdd1, type: 3}

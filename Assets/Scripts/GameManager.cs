@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private int level;
-    private int lives;
+    public int lives;
     private int score;
 
     public int LugiCounter;
@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     private void LoadLevel(int index)
     {
         level = index;
+        Physics2D.IgnoreLayerCollision(0, 0, false);
 
         Camera camera = Camera.main;
 

@@ -163,6 +163,32 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2e55e44f400874a689a122e135e31310, type: 3}
   - {fileID: 21300000, guid: aa9c1cff99c61425182c456e68ac9466, type: 3}
   climbSprite: {fileID: 21300000, guid: 5d481826ec94b4f53a045c6f681258b1, type: 3}
+  runSpritesL:
+  - {fileID: 21300000, guid: ece2849b7c9af481ab88c90374b7b346, type: 3}
+  - {fileID: 21300000, guid: 7be7c6e19f2714f8ab6de52b76beff8a, type: 3}
+  - {fileID: 21300000, guid: ece2849b7c9af481ab88c90374b7b346, type: 3}
+  - {fileID: 21300000, guid: 8cd5d90a0c6e44380af5b04601a7b85b, type: 3}
+  hammerUpSpritesL:
+  - {fileID: 21300000, guid: 44762d7bdc2a14e458c7545a145f111e, type: 3}
+  - {fileID: 21300000, guid: 11d059e25d7b14373882059442c483e6, type: 3}
+  - {fileID: 21300000, guid: 44762d7bdc2a14e458c7545a145f111e, type: 3}
+  - {fileID: 21300000, guid: 743ae2384e6194f9c89807ba3d48c6ba, type: 3}
+  hammerDownSpritesL:
+  - {fileID: 21300000, guid: f10177ae4d007450a9d945efafa9b347, type: 3}
+  - {fileID: 21300000, guid: bf7200247ddcc48cdb9dce907b79d5f7, type: 3}
+  - {fileID: 21300000, guid: f10177ae4d007450a9d945efafa9b347, type: 3}
+  - {fileID: 21300000, guid: 6994528b8fbbc4d6091baf83488e7378, type: 3}
+  hoseDownSpritesL:
+  - {fileID: 21300000, guid: e1f498e1053e24af6b30fcde55277dc4, type: 3}
+  - {fileID: 21300000, guid: 66961f7e140244211aa7fa6b6b44da10, type: 3}
+  - {fileID: 21300000, guid: e1f498e1053e24af6b30fcde55277dc4, type: 3}
+  - {fileID: 21300000, guid: 0a4bd780b426f4f6093ee185451026e6, type: 3}
+  hoseUpSpritesL:
+  - {fileID: 21300000, guid: b8f9bee6b9f2d4d2cb68492b35c37eb4, type: 3}
+  - {fileID: 21300000, guid: 61b450ef762374e3386140713d76ef31, type: 3}
+  - {fileID: 21300000, guid: b8f9bee6b9f2d4d2cb68492b35c37eb4, type: 3}
+  - {fileID: 21300000, guid: 248368a3ad6154163b2ae55077f97880, type: 3}
+  climbSpriteL: {fileID: 21300000, guid: fc2ddd21a262b43dabfdbc5580391188, type: 3}
   moveSpeed: 3
   jumpStrength: 4
   conveySpeed: 1.75

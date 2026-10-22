@@ -11,6 +11,13 @@ public class Player : MonoBehaviour
     public Sprite[] hoseUpSprites;
     public Sprite climbSprite;
     private int spriteIndex;
+
+    public Sprite[] runSpritesL;
+    public Sprite[] hammerUpSpritesL;
+    public Sprite[] hammerDownSpritesL;
+    public Sprite[] hoseDownSpritesL;
+    public Sprite[] hoseUpSpritesL;
+    public Sprite climbSpriteL;
     
     private new Rigidbody2D rigidbody;
     private new Collider2D collider;
@@ -53,9 +60,11 @@ public class Player : MonoBehaviour
     public Transform conveyTransform;
 
     private GameObject bgm;
+    private GameObject gameManage;
     
     private void Awake()
     {
+        gameManage = GameObject.Find("GameManager");
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidbody = GetComponent<Rigidbody2D>();
         collider = GetComponent<Collider2D>();
@@ -242,7 +251,13 @@ public class Player : MonoBehaviour
     {
         if (climbing)
         {
-            spriteRenderer.sprite = climbSprite;
+            if (gameManage.GetComponent<GameManager>().LugiMode == false)
+            {
+                spriteRenderer.sprite = climbSprite;
+            } else
+            {
+                spriteRenderer.sprite = climbSpriteL;
+            }
         }
         else 
         {
@@ -254,7 +269,6 @@ public class Player : MonoBehaviour
                 }
             }
         
-        
             if (item == 1)
             {
                 if (hammerDownTime == 2) {
@@ -265,27 +279,55 @@ public class Player : MonoBehaviour
                     hammerDownTime = 0;
                 }
 
-                if (hammerDown) {
-                    spriteRenderer.sprite = hammerDownSprites[spriteIndex];
+                if (gameManage.GetComponent<GameManager>().LugiMode == false)
+                {
+                    if (hammerDown) {
+                        spriteRenderer.sprite = hammerDownSprites[spriteIndex];
+                    } else
+                    {
+                        spriteRenderer.sprite = hammerUpSprites[spriteIndex];
+                    }
                 } else
                 {
-                    spriteRenderer.sprite = hammerUpSprites[spriteIndex];
+                    if (hammerDown) {
+                        spriteRenderer.sprite = hammerDownSpritesL[spriteIndex];
+                    } else
+                    {
+                        spriteRenderer.sprite = hammerUpSpritesL[spriteIndex];
+                    }
                 }
 
                 hammerDownTime++;
             } 
             else if (item == 2)
             {
-                if (hoseDown == 0) {
-                    spriteRenderer.sprite = hoseUpSprites[spriteIndex];
+                if (gameManage.GetComponent<GameManager>().LugiMode == false)
+                {
+                    if (hoseDown == 0) {
+                        spriteRenderer.sprite = hoseUpSprites[spriteIndex];
+                    } else
+                    {
+                        spriteRenderer.sprite = hoseDownSprites[spriteIndex];
+                    }
                 } else
                 {
-                    spriteRenderer.sprite = hoseDownSprites[spriteIndex];
+                    if (hoseDown == 0) {
+                        spriteRenderer.sprite = hoseUpSpritesL[spriteIndex];
+                    } else
+                    {
+                        spriteRenderer.sprite = hoseDownSpritesL[spriteIndex];
+                    }
                 }
             }
             else if (item == 0)
             {
-                spriteRenderer.sprite = runSprites[spriteIndex];
+                if (gameManage.GetComponent<GameManager>().LugiMode == false)
+                {
+                    spriteRenderer.sprite = runSprites[spriteIndex];
+                } else
+                {
+                    spriteRenderer.sprite = runSpritesL[spriteIndex];
+                }
             }
         }
     }
@@ -300,6 +342,7 @@ public class Player : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
+            Physics2D.IgnoreLayerCollision(0, 0, true);
             bgm.GetComponent<MusicController>().StopMusic();
             bgm.GetComponent<MusicController>().PlayClip2D(deathSFX);
             enabled = false;
